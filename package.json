@@ -1,0 +1,38 @@
+{
+  "name": "graphql-server",
+  "version": "1.0.0",
+  "description": "graphql server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/helabenkhalfallah/graphql-server.git"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "graphql"
+  ],
+  "author": "hela ben khalfallah",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/helabenkhalfallah/graphql-server/issues"
+  },
+  "homepage": "https://github.com/helabenkhalfallah/graphql-server#readme",
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "cors": "^2.8.4",
+    "dotenv": "^5.0.1",
+    "express": "^4.16.3",
+    "express-graphql": "^0.6.12",
+    "graphql": "^0.13.2",
+    "mongoose": "^5.0.10"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.0",
+    "eslint-plugin-react": "^7.7.0"
+  }
+}
