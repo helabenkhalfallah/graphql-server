@@ -1,7 +1,7 @@
 # graphql-server
 
 
-1. install dependecies : 
+1. install dependencies : 
 npm install graphql express express-graphql —save
 
 2. configure lint :
