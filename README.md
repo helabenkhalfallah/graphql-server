@@ -1,4 +1,6 @@
 # graphql-server
+
+
 1. install dependecies : 
 npm install graphql express express-graphql —save
 
