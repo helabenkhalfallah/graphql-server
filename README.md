@@ -8,7 +8,7 @@ npm install graphql express express-graphql —save
 npm install eslint --save-dev
 ./node_modules/.bin/eslint --init
 
-3.add a /server/server.js file
+3. add a /server/server.js file
 in this file we will configure our gql server.
 we start by configure a simple express server
 
