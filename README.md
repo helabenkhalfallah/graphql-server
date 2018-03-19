@@ -10,6 +10,7 @@ npm install eslint --save-dev
 in this file we will configure our gql server.
 we start by configure a simple express server
 
+```js
 //express config 
 const express = require('express')
 const expressGraphQL = require('express-graphql')
@@ -30,11 +31,13 @@ console.log('portNumber : ', portNumber)
 app.listen(portNumber, () => {
   console.log('Server is running...')
 })
+```
 
 4. configure dotenv :
 npm install dotenv --save
 in index.js file and before any load :
 
+```js
 //dot env configuration
 var dotenv = require('dotenv')
 dotenv.load()
@@ -42,5 +45,5 @@ console.log('Your environment variable GRAPHQL_APP_PATH has the value: ', proces
 
 //launch server after loading env var
 require('./server/server.js')
-
+```
 
