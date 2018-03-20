@@ -109,7 +109,7 @@ let userSchema = mongoose.Schema(
   {
     first_name: String,
     last_name: String,
-    birthdaye: String,
+    birthday: String,
     job: String,
   },
   {
