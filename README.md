@@ -100,5 +100,29 @@ app.use('/graphql', cors(), expressGraphQL({
   graphiql: true
 }))
 ```
-A single endpoint, every things is handleld internaly inside gql : queries and mutations !
-
+A single endpoint, every things is handled internaly inside gql : queries and mutations !
+23. I found an issue firstly when calling find, I got an empty result.
+I resolved this by adding collection name on mongoose models :
+```js
+let userSchema = mongoose.Schema(
+  {
+    first_name: String,
+    last_name: String,
+    birthdaye: String,
+    job: String,
+  },
+  {
+    collection: 'User'
+  })
+```
+```js
+let photoSchema = mongoose.Schema(
+  {
+    url: String,
+    description: String,
+    date: String,
+  },
+  {
+    collection: 'Photo'
+  })
+```
