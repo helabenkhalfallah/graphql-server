@@ -7,13 +7,15 @@ module.exports = {
     },
     "extends": "eslint:recommended",
     "parserOptions": {
-        "ecmaFeatures": { 
-            "jsx": true
-        },
-        "sourceType": "module"
-    }, 
+        "sourceType": "module",
+        "ecmaVersion": 8,
+        "ecmaFeatures": {
+            "jsx": true,
+            "experimentalObjectRestSpread": true
+        }
+    },
     "rules": {
-        "linebreak-style": 0, 
+        "linebreak-style": 0,
         "indent": [
             2,
             2,

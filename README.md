@@ -2,7 +2,7 @@
 
 
 1. install dependencies : 
-npm install graphql express express-graphql —save
+npm install graphql express express-graphql --save
 
 2. configure lint :
 npm install eslint --save-dev
@@ -48,4 +48,49 @@ console.log('Your environment variable GRAPHQL_APP_PATH has the value: ', proces
 //launch server after loading env var
 require('./server/server.js')
 ```
+5. add cors, mongoose and bluebird
+npm install cors mongoose bluebird --save
+
+6. add models folder which will contains all mongoose schema.
+7. add graphql folder which will contains all gql schema & CRUD.
+8. all models defined on models are exported on a single module inside index.js.
+9. all schem & CRUD defined on graphql are exported on a single module inside index.js.
+10. Define all constant inside .env file.
+11. add babel to run ES6
+npm install --save-dpev babel-cli
+npm install --save-dev babel-preset-es2015
+npm install --save-dev babel-preset-stage-0
+12. add  .babelrc
+```js
+{
+  "presets": ["es2015", "stage-0"]
+}
+```
+13. modify package.json to run with babel
+14. add nodemon so that it will automatically reload the app on everychange
+npm install --save-dev nodemon
+https://javierfernandes.gitbooks.io/rest-api-babel-express/content/nodeapp.html
+
+15. mongo database preparation :
+https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/
+https://stackoverflow.com/questions/2518127/how-do-i-reload-bashrc-without-logging-out-and-back-in
+
+16. install Robomongo
+17. customize logger file
+npm install morgan winston winston-daily-rotate-file --save
+18. create a route file : AppRouter.js.
+19. modiy server.js :
+```js
+//routes
+app.use('/users', AppRouter) 
+app.use('/photos', AppRouter)
+
+//route index
+app.get('/', (req, res) => {
+  res.send('Invalid endpoint!')
+})
+```
+20. prepare graphql types
+21. link mongoose schema to graphql types and monggose models using queries and mutation.
+22. modify AppRouter.js to call appropriate action :
 
