@@ -78,8 +78,8 @@ https://stackoverflow.com/questions/2518127/how-do-i-reload-bashrc-without-loggi
 16. install Robomongo
 17. customize logger file
 npm install morgan winston winston-daily-rotate-file --save
-18. create a route file : AppRouter.js.
-19. modiy server.js :
+18. Test express default route - create a route file : AppRouter.js.
+19. Test express default route - modify server.js :
 ```js
 //routes
 app.use('/users', AppRouter) 
@@ -91,6 +91,14 @@ app.get('/', (req, res) => {
 })
 ```
 20. prepare graphql types
-21. link mongoose schema to graphql types and monggose models using queries and mutation.
-22. modify AppRouter.js to call appropriate action :
+21. link mongoose schema to graphql types and mongoose models using queries and mutation.
+22. modify server.js for gql endpoint :
+```js
+app.use('/graphql', cors(), expressGraphQL({
+  schema: UsergqlProvider.UserQueries.UsersListQuery,
+  rootValue: global,
+  graphiql: true
+}))
+```
+A single endpoint, every things is handleld internaly inside gql : queries and mutations !
 
