@@ -1,4 +1,4 @@
-# graphql-server
+# graphql-server template
 
 
 1. install dependencies : 
