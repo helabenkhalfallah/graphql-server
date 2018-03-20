@@ -127,3 +127,6 @@ let photoSchema = mongoose.Schema(
     collection: 'Photo'
   })
 ```
+24. Results :
+![Screenshot](./assets/images/graphi_ql_result.png)
+![Screenshot](./assets/images/robomongo_test.png)
