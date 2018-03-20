@@ -1,12 +1,12 @@
 # graphql-server template
 
-Technologies :
+** Technologies : **
 Nodejs
 Express 
 graphql
 Mongoose
 
-Guidelines :
+** Guidelines : **
 
 1. install dependencies : 
 npm install graphql express express-graphql --save
