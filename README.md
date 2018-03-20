@@ -128,5 +128,5 @@ let photoSchema = mongoose.Schema(
   })
 ```
 24. Results :
-![Screenshot](./assets/images/graphi_ql_result.png)
-![Screenshot](./assets/images/robomongo_test.png)
+![Screenshot](./assets/images/graphi_ql_result_1.png)
+![Screenshot](./assets/images/robomongo_test_1.png)
