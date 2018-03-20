@@ -101,6 +101,7 @@ app.use('/graphql', cors(), expressGraphQL({
 }))
 ```
 A single endpoint, every things is handled internaly inside gql : queries and mutations !
+
 23. I found an issue firstly when calling find, I got an empty result.
 I resolved this by adding collection name on mongoose models :
 ```js
