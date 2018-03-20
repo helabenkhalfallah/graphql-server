@@ -1,10 +1,10 @@
 # graphql-server template
 
 **Technologies :**
-*Nodejs*
-*Express* 
+*nodejs*
+*express* 
 *graphql*
-*Mongoose*
+*mongoose*
 
 **Guidelines :**
 
