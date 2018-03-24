@@ -2,13 +2,21 @@ import { GraphQLNonNull, GraphQLString } from 'graphql'
 import AppModels from '../../../models/index'
 import User from '../types/User'
 
-
 //add
 let UserAdd = {
   type: User,
   args: {
-    name: {
+    first_name: {
       type: new GraphQLNonNull(GraphQLString),
+    },
+    last_name: {
+      type: new GraphQLNonNull(GraphQLString),
+    },
+    birthday: {
+      type: GraphQLString,
+    },
+    job: {
+      type: GraphQLString,
     }
   },
   resolve(root, params) {

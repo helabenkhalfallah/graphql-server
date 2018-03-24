@@ -10,10 +10,10 @@ let User = new GraphQLObjectType({
         type: new GraphQLNonNull(GraphQLID),
       },
       first_name: {
-        type: GraphQLString,
+        type: new GraphQLNonNull(GraphQLString),
       },
       last_name: {
-        type: GraphQLString,
+        type: new GraphQLNonNull(GraphQLString),
       },
       birthday: {
         type: GraphQLString,
