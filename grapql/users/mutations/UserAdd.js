@@ -6,10 +6,10 @@ import User from '../types/User'
 let UserAdd = {
   type: User,
   args: {
-    first_name: {
+    firstName: {
       type: new GraphQLNonNull(GraphQLString),
     },
-    last_name: {
+    lastName: {
       type: new GraphQLNonNull(GraphQLString),
     },
     birthday: {

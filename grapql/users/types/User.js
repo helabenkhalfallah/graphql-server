@@ -9,10 +9,10 @@ let User = new GraphQLObjectType({
       id: {
         type: new GraphQLNonNull(GraphQLID),
       },
-      first_name: {
+      firstName: {
         type: new GraphQLNonNull(GraphQLString),
       },
-      last_name: {
+      lastName: {
         type: new GraphQLNonNull(GraphQLString),
       },
       birthday: {

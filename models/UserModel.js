@@ -4,8 +4,8 @@ import mongoose from 'mongoose'
 //prepare mongoose user schema
 let userSchema = mongoose.Schema(
   {
-    first_name: String,
-    last_name: String,
+    firstName: String,
+    lastName: String,
     birthday: String,
     job: String,
   },
