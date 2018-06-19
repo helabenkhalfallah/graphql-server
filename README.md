@@ -143,3 +143,7 @@ let photoSchema = mongoose.Schema(
 24. Results :
 ![Screenshot](./assets/images/graphi_ql_result_2.png)
 ![Screenshot](./assets/images/robomongo_test_2.png)
+
+25. queries & mutations :
+/graphq/users/mutations
+/graphq/users/queries

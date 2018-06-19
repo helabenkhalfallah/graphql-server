@@ -1,7 +1,6 @@
 import { GraphQLList, GraphQLObjectType } from 'graphql'
 import AppModels from '../../../models/index'
 import User from '../types/User'
-import AppLogger from '../../../core/logger/AppLogger'
 
 // Query
 let UsersList = new GraphQLObjectType({
@@ -13,8 +12,6 @@ let UsersList = new GraphQLObjectType({
       resolve() {
         return new Promise((resolve, reject) => {
           AppModels.UserModel.find((error, users) => {
-            AppLogger.debug('err : ', error)
-            AppLogger.debug('users : ', users)
             if (error) reject(error)
             else resolve(users)
           })

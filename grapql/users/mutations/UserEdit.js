@@ -1,7 +1,6 @@
-import { GraphQLNonNull, GraphQLString, GraphQLID } from 'graphql'
+import { GraphQLNonNull, GraphQLString } from 'graphql'
 import AppModels from '../../../models/index'
 import User from '../types/User'
-import AppLogger from '../../../core/logger/AppLogger'
 
 //edit
 let UserEdit = {
@@ -24,7 +23,6 @@ let UserEdit = {
     }
   },
   resolve(root, params) {
-    AppLogger.debug('UserEdit params : ', params)
     return new Promise((resolve, reject) => {
       AppModels.UserModel.findOne({ email: params.email }, (error, user) => {
         // update only if user exist

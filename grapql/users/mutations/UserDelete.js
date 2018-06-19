@@ -1,7 +1,6 @@
 import { GraphQLString } from 'graphql'
 import AppModels from '../../../models/index'
 import User from '../types/User'
-import AppLogger from '../../../core/logger/AppLogger'
 
 //add
 let UserDelete = {
@@ -12,7 +11,6 @@ let UserDelete = {
     }
   },
   resolve(root, params) {
-    AppLogger.debug('UserDelete params : ', params)
     return new Promise((resolve, reject) => {
       // insert only if user not exist
       AppModels.UserModel.findOne({ email: params.email }, (error, user) => {

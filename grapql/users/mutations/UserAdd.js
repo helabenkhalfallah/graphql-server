@@ -1,7 +1,6 @@
 import { GraphQLNonNull, GraphQLString } from 'graphql'
 import AppModels from '../../../models/index'
 import User from '../types/User'
-import AppLogger from '../../../core/logger/AppLogger'
 
 //add
 let UserAdd = {
@@ -24,7 +23,6 @@ let UserAdd = {
     }
   },
   resolve(root, params) {
-    AppLogger.debug('UserAdd params : ', params)
     return new Promise((resolve, reject) => {
       // insert only if user not exist
       AppModels.UserModel.findOne({ email: params.email }, (error, user) => {
@@ -33,7 +31,6 @@ let UserAdd = {
           if (!user) {
             const userModel = new AppModels.UserModel(params)
             let newUser = userModel.save(userModel)
-            AppLogger.debug('UserAdd newUser : ', newUser)
             if (newUser) {
               resolve(newUser)
             } else {
