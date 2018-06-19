@@ -1,10 +1,10 @@
-import { GraphQLNonNull, GraphQLString } from 'graphql'
+import { GraphQLNonNull, GraphQLString, GraphQLID } from 'graphql'
 import AppModels from '../../../models/index'
 import User from '../types/User'
 import AppLogger from '../../../core/logger/AppLogger'
 
-//add
-let UserAdd = {
+//edit
+let UserEdit = {
   type: User,
   args: {
     firstName: {
@@ -24,23 +24,25 @@ let UserAdd = {
     }
   },
   resolve(root, params) {
-    AppLogger.debug('UserAdd params : ', params)
+    AppLogger.debug('UserEdit params : ', params)
     return new Promise((resolve, reject) => {
-      // insert only if user not exist
       AppModels.UserModel.findOne({ email: params.email }, (error, user) => {
-        // insert only if user not exist
+        // update only if user exist
         if (!error) {
-          if (!user) {
-            const userModel = new AppModels.UserModel(params)
-            let newUser = userModel.save(userModel)
-            AppLogger.debug('UserAdd newUser : ', newUser)
-            if (newUser) {
-              resolve(newUser)
+          if (user) {
+            user.firstName = params.firstName
+            user.lastName = params.lastName
+            user.birthday = params.birthday
+            user.job = params.job
+            user.email = params.email
+            const userUpdated = user.save()
+            if (userUpdated) {
+              resolve(userUpdated)
             } else {
-              reject(new Error('error when user insert'))
+              reject(new Error('error when updating user'))
             }
           } else {
-            reject(new Error('user exist'))
+            reject(new Error('User not exist'))
           }
         } else {
           reject(error)
@@ -50,5 +52,5 @@ let UserAdd = {
   }
 }
 
-//export user add mutation
-export default UserAdd 
+//export user edit mutation
+export default UserEdit 

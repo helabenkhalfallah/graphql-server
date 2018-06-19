@@ -20,6 +20,9 @@ let User = new GraphQLObjectType({
       },
       job: {
         type: GraphQLString,
+      },
+      email: {
+        type: GraphQLString,
       }
     }
   }

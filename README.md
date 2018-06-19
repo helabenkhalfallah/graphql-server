@@ -64,9 +64,11 @@ npm install cors mongoose bluebird --save
 9. all schem & CRUD defined on graphql are exported on a single module inside index.js.
 10. Define all constant inside .env file.
 11. add babel to run ES6
-npm install --save-dpev babel-cli
+```js
+npm install --save-dev babel-cli
 npm install --save-dev babel-preset-es2015
 npm install --save-dev babel-preset-stage-0
+```
 12. add  .babelrc
 ```js
 {
@@ -75,7 +77,9 @@ npm install --save-dev babel-preset-stage-0
 ```
 13. modify package.json to run with babel
 14. add nodemon so that it will automatically reload the app on everychange
+```js
 npm install --save-dev nodemon
+```
 https://javierfernandes.gitbooks.io/rest-api-babel-express/content/nodeapp.html
 
 15. mongo database preparation :
@@ -84,7 +88,9 @@ https://stackoverflow.com/questions/2518127/how-do-i-reload-bashrc-without-loggi
 
 16. install Robomongo
 17. customize logger file
+```js
 npm install morgan winston winston-daily-rotate-file --save
+```
 18. Test express default route - create a route file : AppRouter.js.
 19. Test express default route - modify server.js :
 ```js
