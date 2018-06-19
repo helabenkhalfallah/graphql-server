@@ -39,10 +39,10 @@ let UserEdit = {
             if (userUpdated) {
               resolve(userUpdated)
             } else {
-              reject(new Error('error when updating user'))
+              reject(new Error('Error when updating user'))
             }
           } else {
-            reject(new Error('User not exist'))
+            reject(new Error('Error when updating user'))
           }
         } else {
           reject(error)
