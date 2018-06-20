@@ -2,7 +2,7 @@ import { GraphQLString } from 'graphql'
 import AppModels from '../../../models/index'
 import User from '../types/User'
 
-//add
+//delete
 let UserDelete = {
   type: User,
   args: {
@@ -12,9 +12,9 @@ let UserDelete = {
   },
   resolve(root, params) {
     return new Promise((resolve, reject) => {
-      // insert only if user not exist
+      // delete only if user exist
       AppModels.UserModel.findOne({ email: params.email }, (error, user) => {
-        // insert only if user not exist
+        // delete only if user exist
         if (!error) {
           if (user) {
             // delete user

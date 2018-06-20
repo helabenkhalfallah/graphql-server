@@ -1,6 +1,8 @@
 //import router 
-//import AppRouter from '../routes/AppRouter'
+//import AppRouter from '../routes/AppRouter' 
+require('graphql-schema-utils')
 import UsergqlProvider from '../grapql/users'
+import PhotogqlProvider from '../grapql/photos'
 
 //import logger
 import AppLogger from '../core/logger/AppLogger'
@@ -31,9 +33,12 @@ app.use(morgan('dev', { 'stream': AppLogger.stream }))
 
 //routes
 //app.use('/users', AppRouter)
-//app.use('/photos', AppRouter) 
+//app.use('/photos', AppRouter)
+
+// GraphQL schema
+// let gqlSchema = UsergqlProvider.merge(PhotogqlProvider) 
 app.use('/graphql', cors(), expressGraphQL({
-  schema: UsergqlProvider,
+  schema: PhotogqlProvider,
   rootValue: global,
   graphiql: true
 }))

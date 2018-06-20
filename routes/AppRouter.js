@@ -3,9 +3,7 @@ import express from 'express'
 const AppRouter = express.Router()
 
 AppRouter.get('/users', (req, res) => {
-
-
-
+  AppLogger.debug('photos ', res)
 })
 
 AppRouter.post('/photos', (req, res) => {
