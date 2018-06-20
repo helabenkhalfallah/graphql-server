@@ -107,8 +107,9 @@ app.get('/', (req, res) => {
 21. link mongoose schema to graphql types and mongoose models using queries and mutation.
 22. modify server.js for gql endpoint :
 ```js
+import gqlProvider from '../grapql'
 app.use('/graphql', cors(), expressGraphQL({
-  schema: UsergqlProvider.UserQueries.UsersListQuery,
+  schema: gqlProvider,
   rootValue: global,
   graphiql: true
 }))
