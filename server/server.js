@@ -1,17 +1,5 @@
-//import router 
-//import AppRouter from '../routes/AppRouter' 
-require('graphql-schema-utils')
-import UsergqlProvider from '../grapql/users'
-import PhotogqlProvider from '../grapql/photos'
-
-//import logger
-import AppLogger from '../core/logger/AppLogger'
+//libs import
 import morgan from 'morgan'
-AppLogger.stream = {
-  write: function (message, encoding) {
-    AppLogger.info(message, encoding)
-  }
-}
 
 //express config 
 import express from 'express'
@@ -19,6 +7,17 @@ import cors from 'cors'
 
 //graphql express
 import expressGraphQL from 'express-graphql'
+
+//app import
+//import AppRouter from '../routes/AppRouter' 
+import gqlProvider from '../grapql'
+import AppLogger from '../core/logger/AppLogger'
+
+AppLogger.stream = {
+  write: function (message, encoding) {
+    AppLogger.info(message, encoding)
+  }
+}
 
 //mongoose part
 import DBConnect from '../db/DBConnect'
@@ -36,9 +35,8 @@ app.use(morgan('dev', { 'stream': AppLogger.stream }))
 //app.use('/photos', AppRouter)
 
 // GraphQL schema
-// let gqlSchema = UsergqlProvider.merge(PhotogqlProvider) 
 app.use('/graphql', cors(), expressGraphQL({
-  schema: PhotogqlProvider,
+  schema: gqlProvider,
   rootValue: global,
   graphiql: true
 }))

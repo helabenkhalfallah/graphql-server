@@ -148,5 +148,5 @@ let photoSchema = mongoose.Schema(
 /graphq/users/mutations
 /graphq/users/queries
 
-26. add graphql-schema-utils to merge schema
-yarn add graphql-schema-utils
+26. add graphql-tools to merge schema
+yarn add graphql-tools
