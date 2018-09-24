@@ -60,7 +60,6 @@ export default graphqlHTTP((req, res) => {
             message: MesssageProvider.messageByKey(Messages.KEYS.WRONG_SESSION)
           })
       }
-      next(user)
     })(req, res, next)
   })
 })
