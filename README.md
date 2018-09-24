@@ -151,3 +151,121 @@ let photoSchema = mongoose.Schema(
 
 26. authentication :
 yarn add jsonwebtoken passport passport-local-mongoose bcrypt passport-jwt
+
+27. Passport strategy configuration : 
+/passport/passport.js
+```js
+let opts = {}
+opts.jwtFromRequest = ExtractJWT.fromAuthHeaderWithScheme(process.env.JWT_SCHEME)
+opts.secretOrKey = process.env.JWT_SECRET_OR_KEY
+const passeportJWTStrategy = new JWTStrategy(opts, function (jwt_payload, done) {
+  const email = jwt_payload.email
+  User.findOne({ email: email }, (error, user) => {
+    if (error) {
+      return done(error, false)
+    } else {
+      if (user) {
+        done(null, user)
+      } else {
+        done(null, false)
+      }
+    }
+  })
+})
+```
+
+28. Passport MiddleWare :
+/passport/passportMiddleWare
+```js
+const passportMiddleware = express()
+passportMiddleware.use(passport.initialize())
+passportMiddleware.use(passport.session())
+```
+
+29. Configure our server to use passport middleware :
+```js
+import passportMiddleware from '../passport/passportMiddleware'
+
+// init and configure passport
+app.use(passportMiddleware)
+```
+
+30. graphql middleware : context to handle authorization (required token)
+/graphql/middleware/gqlMiddleware.js
+```js
+// passport proxy
+    passport.authenticate(process.env.JWT_SCHEME, { session: false }, (error, user) => {
+
+      // get request payload
+      const body = req.body ? req.body.query : ''
+
+      // if is login or register skip token auth
+      if (body && (body.includes('AuthLogin') || body.includes('AuthRegister'))) {
+        next()
+        return
+      }
+
+      // need auth for others endpoint
+      const token = AuthUtils.retrieveToken(req.headers)
+      if (AuthUtils.isValidToken(token)) {
+        // valid token
+        next(user)
+```
+
+31. Configure server to use gqlMiddleware :
+```js
+import gqlMiddleware from '../grapql/middleware/gqlMiddleware'
+
+// use graphql middleware
+app.use('/graphql', gqlMiddleware)
+```
+
+32. Change queries & mutations :
+```js
+// Query
+export default {
+  type: new GraphQLList(User),
+  resolve: (_, args, context) => {
+
+    // user authorization 
+    if (!context.user) {
+      throw new Error(Messages.KEYS.WRONG_SESSION)
+    }
+
+    // users
+    const users = AppModels.UserModel.find().exec()
+    if (!users) {
+      throw new Error(Messages.KEYS.USER_LIST_ERROR)
+    }
+    return users
+  }
+}
+```
+
+```js
+//delete
+const UserDelete = {
+  type: User,
+  args: {
+    email: {
+      type: new GraphQLNonNull(GraphQLString),
+    }
+  },
+  resolve: (_, params, context) => {
+    return new Promise((resolve, reject) => {
+
+      // user authorization 
+      if (!context.user) {
+        reject(Messages.KEYS.WRONG_SESSION)
+      }
+```
+
+33. Results :
+![Screenshot](./assets/images/gql_auth_1.png)
+![Screenshot](./assets/images/gql_auth_2.png)
+![Screenshot](./assets/images/gql_auth_3.png)
+![Screenshot](./assets/images/gql_auth_4.png) 
+
+
+
+
