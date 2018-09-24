@@ -1,9 +1,11 @@
 import { GraphQLNonNull, GraphQLString } from 'graphql'
 import AppModels from '../../../models/index'
 import Photo from '../types/Photo'
+import Messages from '../../../messages/Messages'
+
 
 //add
-let PhotoAdd = {
+const PhotoAdd = {
   type: Photo,
   args: {
     userId: {
@@ -19,8 +21,15 @@ let PhotoAdd = {
       type: GraphQLString,
     }
   },
-  resolve(root, params) {
+  resolve: (_, params, context) => {
     return new Promise((resolve, reject) => {
+
+      // user authorization  
+      if (!context.user) {
+        reject(Messages.KEYS.WRONG_SESSION)
+      }
+
+      // add a new photo
       AppModels.PhotoModel.findOne({ path: params.path }, (error, photo) => {
         // insert only if photo path not exist
         if (!error) {
@@ -30,13 +39,13 @@ let PhotoAdd = {
             if (newPhoto) {
               resolve(newPhoto)
             } else {
-              reject(new Error('Error when photo insert'))
+              reject(Messages.KEYS.PHOTO_ADD_ERROR)
             }
           } else {
-            reject(new Error('Error photo already exist'))
+            reject(Messages.KEYS.PHOTO_ALREADY_EXIST)
           }
         } else {
-          reject(error)
+          reject(error.message)
         }
       })
     })

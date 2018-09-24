@@ -2,7 +2,7 @@ import UsersList from './users/queries/UsersList'
 import PhotosList from './photos/queries/PhotosList'
 
 //all queries
-let gqlQueriesProvider = {
+const gqlQueriesProvider = {
   UsersList,
   PhotosList,
 }

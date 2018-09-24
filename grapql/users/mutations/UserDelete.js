@@ -1,19 +1,27 @@
-import { GraphQLString } from 'graphql'
+import { GraphQLNonNull, GraphQLString } from 'graphql'
 import AppModels from '../../../models/index'
 import User from '../types/User'
+import Messages from '../../../messages/Messages'
 
 //delete
-let UserDelete = {
+const UserDelete = {
   type: User,
   args: {
     email: {
-      type: GraphQLString,
+      type: new GraphQLNonNull(GraphQLString),
     }
   },
-  resolve(root, params) {
+  resolve: (_, params, context) => {
     return new Promise((resolve, reject) => {
+
+      // user authorization 
+      if (!context.user) {
+        reject(Messages.KEYS.WRONG_SESSION)
+      }
+
       // delete only if user exist
-      AppModels.UserModel.findOne({ email: params.email }, (error, user) => {
+      const email = params.email
+      AppModels.UserModel.findOne({ email: email }, (error, user) => {
         // delete only if user exist
         if (!error) {
           if (user) {
@@ -22,13 +30,13 @@ let UserDelete = {
             if (userDeleted) {
               resolve(userDeleted)
             } else {
-              reject(new Error('Error occured when deleting user'))
+              reject(Messages.KEYS.USER_DELETE_ERROR)
             }
           } else {
-            reject(new Error('User does not exist'))
+            reject(Messages.KEYS.USER_NOT_EXIST)
           }
         } else {
-          reject(error)
+          reject(error.message)
         }
       })
     })

@@ -1,18 +1,17 @@
 //libs import
 import morgan from 'morgan'
+import bodyParser from 'body-parser'
 
 //express config 
 import express from 'express'
 import cors from 'cors'
 
-//graphql express
-import expressGraphQL from 'express-graphql'
+//app import 
+import gqlMiddleware from '../grapql/middleware/gqlMiddleware'
+import passportMiddleware from '../passport/passportMiddleware'
 
-//app import
-//import AppRouter from '../routes/AppRouter' 
-import gqlProvider from '../grapql'
+// logger
 import AppLogger from '../core/logger/AppLogger'
-
 AppLogger.stream = {
   write: function (message, encoding) {
     AppLogger.info(message, encoding)
@@ -26,20 +25,18 @@ DBConnect()
 // Create an express instance
 const app = express()
 
+// init and configure passport
+app.use(passportMiddleware)
+
+// parse application/json
+app.use(bodyParser.json())
+
 //configure app
 app.use('*', cors())
 app.use(morgan('dev', { 'stream': AppLogger.stream }))
 
-//routes
-//app.use('/users', AppRouter)
-//app.use('/photos', AppRouter)
-
-// GraphQL schema
-app.use('/graphql', cors(), expressGraphQL({
-  schema: gqlProvider,
-  rootValue: global,
-  graphiql: true
-}))
+// use graphql middleware
+app.use('/graphql', gqlMiddleware)
 
 //route index
 app.get('/', (req, res) => {

@@ -148,3 +148,6 @@ let photoSchema = mongoose.Schema(
 25. queries & mutations :
 /graphq/users/mutations
 /graphq/users/queries
+
+26. authentication :
+yarn add jsonwebtoken passport passport-local-mongoose bcrypt passport-jwt

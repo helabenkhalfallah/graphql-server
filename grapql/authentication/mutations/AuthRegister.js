@@ -1,11 +1,11 @@
 import { GraphQLNonNull, GraphQLString } from 'graphql'
-import AppModels from '../../../models/index'
-import User from '../types/User'
-import AuthUtils from '../../authentication/utils/AuthUtils'
 import Messages from '../../../messages/Messages'
+import AppModels from '../../../models/index'
+import User from '../../users/types/User'
+import AuthUtils from '../utils/AuthUtils'
 
-//add
-const UserAdd = {
+// user auth register
+const AuthRegister = {
   type: User,
   args: {
     firstName: {
@@ -30,21 +30,20 @@ const UserAdd = {
       type: GraphQLString,
     }
   },
-  resolve: (_, params, context) => {
+  resolve: (root, params) => {
     return new Promise((resolve, reject) => {
-
-      // user authorization  
-      if (!context.user) {
-        reject(Messages.KEYS.WRONG_SESSION)
-      }
-
-      // add user
+      // insert only if user not exist
       if (AuthUtils.isValidUser(params)) {
         // insert only if we have required data
+        // we can find by username or email
+        // because they are unique
         // insert only if user not exist
-        AppModels.UserModel.findOne({ email: params.email }, (error, user) => {
+        let email = params.email || ''
+        AppModels.UserModel.findOne({ email: email }, (error, user) => {
           // insert only if user not exist
-          if (!error) {
+          if (error) {
+            reject(error.message)
+          } else {
             if (!user) {
               const userModel = new AppModels.UserModel(params)
               let newUser = userModel.save(userModel)
@@ -56,8 +55,6 @@ const UserAdd = {
             } else {
               reject(Messages.KEYS.USER_ALREADY_EXIST)
             }
-          } else {
-            reject(error.message)
           }
         })
       } else {
@@ -67,5 +64,4 @@ const UserAdd = {
   }
 }
 
-//export user add mutation
-export default UserAdd 
+export default AuthRegister

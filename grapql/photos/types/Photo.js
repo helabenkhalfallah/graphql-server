@@ -1,7 +1,7 @@
 import { GraphQLObjectType, GraphQLNonNull, GraphQLID, GraphQLString } from 'graphql'
 
 // Photo Type
-let Photo = new GraphQLObjectType({
+const Photo = new GraphQLObjectType({
   name: 'Photo',
   description: 'Photo type definition',
   fields: function () {

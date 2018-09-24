@@ -1,20 +1,27 @@
 import { GraphQLString, GraphQLNonNull } from 'graphql'
 import AppModels from '../../../models/index'
 import Photo from '../types/Photo'
+import Messages from '../../../messages/Messages'
 
 //delete
-let PhotoDelete = {
+const PhotoDelete = {
   type: Photo,
   args: {
     path: {
       type: new GraphQLNonNull(GraphQLString),
     }
   },
-  resolve(root, params) {
+  resolve: (_, params, context) => {
     return new Promise((resolve, reject) => {
-      // insert only if photo not exist
+
+      // user authorization  
+      if (!context.user) {
+        reject(Messages.KEYS.WRONG_SESSION)
+      }
+
+      // delete only if photo exist
       AppModels.PhotoModel.findOne({ path: params.path }, (error, photo) => {
-        // insert only if photo not exist
+        // delete only if photo exist
         if (!error) {
           if (photo) {
             // delete photo
@@ -22,13 +29,13 @@ let PhotoDelete = {
             if (photoDeleted) {
               resolve(photoDeleted)
             } else {
-              reject(new Error('Error occured when deleting photo'))
+              reject(Messages.KEYS.PHOTO_DELETE_ERROR)
             }
           } else {
-            reject(new Error('Photo does not exist'))
+            reject(Messages.KEYS.PHOTO_NOT_EXIST)
           }
         } else {
-          reject(error)
+          reject(error.message)
         }
       })
     })
