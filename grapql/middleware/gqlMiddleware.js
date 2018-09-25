@@ -6,7 +6,7 @@ import AppLogger from '../../core/logger/AppLogger'
 import AuthUtils from '../authentication/utils/AuthUtils'
 import MesssageProvider from '../../messages/MesssageProvider'
 import Messages from '../../messages/Messages'
-import { every, isEmpty } from 'lodash'
+import { isEmpty } from 'lodash'
 
 
 // init graphql authentication middleware
