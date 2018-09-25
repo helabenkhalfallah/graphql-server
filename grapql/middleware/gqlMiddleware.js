@@ -6,6 +6,8 @@ import AppLogger from '../../core/logger/AppLogger'
 import AuthUtils from '../authentication/utils/AuthUtils'
 import MesssageProvider from '../../messages/MesssageProvider'
 import Messages from '../../messages/Messages'
+import { every, isEmpty } from 'lodash'
+
 
 // init graphql authentication middleware
 export default graphqlHTTP((req, res) => {
@@ -39,6 +41,12 @@ export default graphqlHTTP((req, res) => {
 
       // get request payload
       const body = req.body ? req.body.query : ''
+
+      // if not body means main url
+      if (isEmpty(body)) {
+        next()
+        return
+      }
 
       // if is login or register skip token auth
       if (body && (body.includes('AuthLogin') || body.includes('AuthRegister'))) {
