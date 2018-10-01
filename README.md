@@ -9,11 +9,16 @@
 **Guidelines :**
 
 1. install dependencies : 
+
+```js
 npm install graphql express express-graphql --save
+```
 
 2. configure lint :
+```js
 npm install eslint --save-dev
 ./node_modules/.bin/eslint --init
+```
 
 3. add a /server/server.js file
 in this file we will configure our gql server.
@@ -43,7 +48,10 @@ app.listen(portNumber, () => {
 ```
 
 4. configure dotenv :
+```js
 npm install dotenv --save
+```
+
 in index.js file and before any load :
 
 ```js
@@ -56,7 +64,9 @@ console.log('Your environment variable GRAPHQL_APP_PATH has the value: ', proces
 require('./server/server.js')
 ```
 5. add cors, mongoose and bluebird
+```js
 npm install cors mongoose bluebird --save
+```
 
 6. add models folder which will contains all mongoose schema.
 7. add graphql folder which will contains all gql schema & CRUD.
