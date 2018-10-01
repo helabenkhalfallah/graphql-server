@@ -57,10 +57,10 @@ export default graphqlHTTP((req, res) => {
       // need auth for others endpoint
       const token = AuthUtils.retrieveToken(req.headers)
       if (AuthUtils.isValidToken(token)) {
-        // valid token
+        // valid token 
         next(user)
       } else {
-        // invalid token
+        // invalid token 
         res
           .status(401)
           .send({

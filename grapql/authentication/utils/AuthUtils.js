@@ -6,7 +6,7 @@ const isValidToken = (token) => {
     jwt.verify(token, process.env.JWT_SECRET_OR_KEY)
     return true
   } catch (error) {
-    // error
+    // error 
     return false
   }
 }
